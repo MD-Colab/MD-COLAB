@@ -244,4 +244,4 @@ MD Colab is more than code — it is a **movement of builders, learners, and inn
 
 If you believe in collaboration, continuous learning, and building meaningful technology — **MD Colab welcomes you.**
 
-*Approved by Founder of MD Colab  [Mujtaba Alam](https://mujtabaalam.vercel.app/) *
+> *Approved by Founder of MD Colab  [Mujtaba Alam](https://mujtabaalam.vercel.app/)*
