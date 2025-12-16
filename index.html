@@ -1,0 +1,453 @@
+<!--Dovumentation/index.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD Colab | System Architecture & Operational Manuscript</title>
+    <meta name="description" content="The definitive technical guide to the MD Colab Ecosystem, Architecture, and AI References.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/doc-style.css">
+</head>
+<body>
+
+    <div class="app-layout">
+        
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="/" class="logo-lockup">
+                    <img src="/assets/logo/mdcolab-logo.png" alt="" class="logo" width="40px" border-radius="100%">
+                    <div class="logo-text">
+                        <span>MD Colab</span>
+                        <span class="badge">Docs v3.5.0</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" id="nav-search" placeholder="Search manuscript...">
+            </div>
+
+            <nav class="nav-scroller">
+                <div class="nav-group">
+                    <h4>Part I: The Foundation</h4>
+                    <a href="#philosophy" class="nav-link active">1.0 Executive Philosophy</a>
+                    <a href="#infrastructure" class="nav-link">2.0 Infrastructure & Topology</a>
+                </div>
+
+                <div class="nav-group">
+                    <h4>Part II: Database</h4>
+                    <a href="#firestore-arch" class="nav-link">3.0 Firestore NoSQL Architecture</a>
+                </div>
+
+                <div class="nav-group">
+                    <h4>Part III: Core Platform</h4>
+                    <a href="#auth-security" class="nav-link">4.0 Authentication & Security</a>
+                    <a href="#ide-engine" class="nav-link">5.0 The IDE Engine</a>
+                </div>
+
+                <div class="nav-group">
+                    <h4>Part IV: Artificial Intelligence</h4>
+                    <a href="#zainin-engine" class="nav-link">6.0 The Zainin Cognitive Engine</a>
+                    <a href="#tool-use" class="nav-link">7.0 Tool Use & Function Calling</a>
+                </div>
+
+                <div class="nav-group">
+                    <h4>Part V: Frontend Engineering</h4>
+                    <a href="#design-system" class="nav-link">8.0 The Design System</a>
+                    <a href="#project-management" class="nav-link">9.0 Project Management Modules</a>
+                </div>
+                 <div class="nav-group">
+                    <h4>Part VI: Operations</h4>
+                    <a href="#deployment" class="nav-link">10.0 Deployment Pipeline</a>
+                    <a href="#disaster-recovery" class="nav-link">11.0 Disaster Recovery</a>
+                    <a href="#future-horizons" class="nav-link">12.0 Future Horizons (2025-2030)</a>
+                </div>
+                <div class="nav-group">
+                    <h4>Part VII: User Guides</h4>
+                    <a href="#collab-guide" class="nav-link">13.0 The Collab Workspace</a>
+                    <a href="#profile-guide" class="nav-link">14.0 The User Profile Dashboard</a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT CANVAS -->
+        <main class="content-canvas">
+            <header class="mobile-header">
+                <button id="toggle-sidebar"><i class="fas fa-bars"></i></button>
+                <span>MD Colab Docs</span>
+            </header>
+
+            <!-- PART I -->
+            <article id="philosophy" class="page-section active">
+                <div class="page-header">
+                    <span class="chapter-label">Part I: The Foundation</span>
+                    <h1>1.0 Executive Philosophy</h1>
+                    <p class="lead">The core principles that define MD Colab's mission to democratize innovation.</p>
+                </div>
+                <div class="content-body">
+                    <h3>1.1 The Definition of Decentralized Innovation</h3>
+                    <p>MD Colab was conceived not merely as a software suite, but as a socio-technical experiment in reducing the friction between ideation and execution. Traditional software development lifecycles are plagued by "context switching"—moving from a communication tool (Slack) to a management tool (Jira) to a creation tool (VS Code). MD Colab collapses these verticals into a singular, browser-based operating system. By decentralizing the tools required for creation, we lower the barrier to entry for students, developers, and innovators in developing nations.</p>
+                    
+                    <h3>1.2 The "Sentient Workspace" Paradigm</h3>
+                    <p>Current development environments are passive; they wait for user input. MD Colab introduces the concept of a <strong>Sentient Workspace</strong>. Through the integration of the "Zainin" AI agent, the environment possesses "awareness." It knows which file is open, it understands the status of the Kanban board, and it recalls previous conversations. This shifts the user relationship from "Command-Line" to "Collaborative Partner."</p>
+
+                    <h3>1.3 Core Engineering Principles</h3>
+                    <ul>
+                        <li><strong>Velocity over Complexity:</strong> We reject the modern heavy JavaScript frameworks (React/Next.js) for the core platform in favor of Vanilla ES6+. This eliminates build steps, reduces bundle size by 90%, and ensures the platform runs on low-end hardware common in our target demographic.</li>
+                        <li><strong>Data Sovereignty:</strong> Users own their data. While hosted on our cloud, the architecture is designed so projects can be exported to standard JSON/Zip formats at any time.</li>
+                        <li><strong>Atomic Modularity:</strong> Every feature (Chat, Code, Tasks) operates as an independent module that shares a common state object, preventing cascading failures.</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article id="infrastructure" class="page-section">
+                <div class="page-header">
+                    <span class="chapter-label">Part I: The Foundation</span>
+                    <h1>2.0 Infrastructure & Topology</h1>
+                    <p class="lead">A high-level overview of the system's deployment and service architecture.</p>
+                </div>
+                <div class="content-body">
+                    <h3>2.1 The Hybrid Client-Side Monolith</h3>
+                    <p>MD Colab utilizes a unique architecture that behaves like a complex Single Page Application (SPA) while being hosted as a static site. This approach provides the performance of a static build with the dynamic capabilities of a BaaS-powered application.</p>
+                    
+                    <h3>2.2 Backend-as-a-Service (BaaS) Dependency Map</h3>
+                    <p>The entire backend logic is offloaded to managed services, primarily Google Firebase. This includes real-time database (Firestore), authentication (Firebase Auth), and hosting, allowing the core team to focus exclusively on frontend and AI innovation.</p>
+
+                    <h3>2.3 The Edge Network Strategy (Vercel & Firebase)</h3>
+                    <p>Static assets are deployed globally via Vercel's Edge Network, ensuring minimal latency for the initial application load. All subsequent data operations are handled by Firebase's regional servers, providing low-latency data synchronization for users worldwide.</p>
+                    
+                    <h3>2.4 Service Workers & PWA Capabilities</h3>
+                    <p>MD Colab is architected as a Progressive Web App (PWA). A service worker handles caching of static assets, enabling offline access to the core platform and previously loaded project data. This is critical for users in regions with intermittent internet connectivity.</p>
+                </div>
+            </article>
+
+            <!-- PART II -->
+            <article id="firestore-arch" class="page-section">
+                <div class="page-header">
+                    <span class="chapter-label">Part II: Database & Data Integrity</span>
+                    <h1>3.0 Firestore NoSQL Architecture</h1>
+                    <p class="lead">The data schema designed for scalability, real-time performance, and cost efficiency.</p>
+                </div>
+                <div class="content-body">
+                    <p>MD Colab leverages Google Firestore for its elasticity and real-time WebSocket capabilities. The database design creates a balance between "Read Costs" and "Relational Integrity."</p>
+
+                    <h3>3.1 Root Collection Strategy vs. Sub-Collection Sharding</h3>
+                    <p>The database is partitioned into three primary root collections to maximize query performance:</p>
+                    <ul>
+                        <li><code class="inline">users</code>: Stores global identity profiles.</li>
+                        <li><code class="inline">collab_teams</code>: Stores organizational metadata.</li>
+                        <li><code class="inline">collab_projects</code>: Stores the actual workspace data.</li>
+                    </ul>
+                    <div class="callout info">
+                        <strong>Why Partition?</strong> By separating Projects from Teams, we prevent deep-nesting limits in Firestore and allow for faster "Collection Group Queries" if we need to search for a project across the entire database without loading team data.
+                    </div>
+                    
+                    <h3>3.3 The Virtual File System (VFS) Schema</h3>
+                    <p>Perhaps the most complex aspect of MD Colab is implementing a file system on top of a flat NoSQL database. The decision to store code as documents instead of in blob storage is key to the platform's real-time and AI capabilities.</p>
+                    <div class="code-block">
+                        <div class="code-header">path: /collab_projects/{projectID}/files/{fileID}</div>
+                        <pre><code class="language-json">{
+  "id": "string (sanitized_filename, e.g., src_components_header_js)",
+  "filename": "string (e.g., src/components/header.js)",
+  "content": "string (raw text content, 1MB limit)",
+  "lastModified": "timestamp",
+  "modifiedBy": "uid_reference"
+}</code></pre>
+                    </div>
+                    <h4>Operational Theory</h4>
+                    <p>Unlike standard approaches that use AWS S3 or Firebase Storage for files, MD Colab stores code as Database Documents. This provides two critical advantages:</p>
+                    <ol>
+                        <li><strong>Real-time Synchronization:</strong> If User A types a character, User B sees it immediately via Firestore listeners without any manual refetching.</li>
+                        <li><strong>AI Indexing:</strong> Since the code is text in the DB, the AI Agent (Zainin) can query, read, and rewrite code without performing HTTP downloads of blob storage, making AI operations significantly faster.</li>
+                    </ol>
+                </div>
+            </article>
+            
+            <!-- PART III -->
+            <article id="auth-security" class="page-section">
+                <div class="page-header">
+                    <span class="chapter-label">Part III: The Core Platform</span>
+                    <h1>4.0 Authentication & Session Security</h1>
+                    <p class="lead">Managing user identity, session persistence, and access control.</p>
+                </div>
+                <div class="content-body">
+                     <h3>4.1 The Persistence Layer</h3>
+                     <p>User sessions are managed by Firebase Auth, which utilizes browser <code class="inline">indexedDB</code> for session persistence. This ensures users remain logged in across browser sessions, providing a seamless experience.</p>
+                     <h3>4.2 MD Pin Generation Algorithms</h3>
+                     <p>The unique "MD Pin" is an 8-digit, human-readable identifier. It is generated client-side upon user registration using a cryptographically secure random number generator and checked against the database for uniqueness before being assigned.</p>
+                     <h3>4.3 Role-Based Access Control (RBAC) in Teams</h3>
+                     <p>While the current implementation is simple, the schema is prepared for RBAC. The <code class="inline">collab_teams</code> collection will contain a members map with roles (e.g., <code class="inline">owner</code>, <code class="inline">editor</code>, <code class="inline">viewer</code>), which will be enforced by Firestore Security Rules.</p>
+                </div>
+            </article>
+
+            <article id="ide-engine" class="page-section">
+                <div class="page-header">
+                    <span class="chapter-label">Part III: The Core Platform</span>
+                    <h1>5.0 The Integrated Development Environment (IDE)</h1>
+                    <p class="lead">The technical implementation of the in-browser code editor and live preview sandbox.</p>
+                </div>
+                <div class="content-body">
+                    <h3>5.1 CodeMirror 5 Implementation Details</h3>
+                    <p>The IDE core is built upon CodeMirror 5. While version 6 exists, version 5 was selected for its battle-tested stability and ease of direct DOM manipulation without a build pipeline.</p>
+                    <div class="code-block">
+                        <div class="code-header">Key Initialization Options</div>
+                        <pre><code class="language-javascript">{
+    theme: "dracula",           // Minimize eye strain
+    lineNumbers: true,          // Essential for debugging
+    lineWrapping: true,         // Prevents horizontal scroll on small screens
+    styleActiveLine: true,      // UX enhancement to track cursor
+    autoCloseBrackets: true
+}</code></pre>
+                    </div>
+                    
+                    <h3>5.2 Dynamic Mode Switching & MIME Type Detection</h3>
+                    <p>The platform utilizes a heuristic detection system to set syntax highlighting. When a file is selected in the VFS, the filename string is parsed, and its extension is mapped to a CodeMirror MIME type via a switch statement.</p>
+
+                    <h3>5.3 The Live Preview Sandbox (Iframe Isolation)</h3>
+                    <p>To render code safely, MD Colab uses an <code class="inline">&lt;iframe&gt;</code>. This provides a security sandbox preventing user code from accessing the parent MD Colab <code class="inline">localStorage</code> or cookies (XSS protection).</p>
+                    
+                    <h3>5.4 GitHub Integration & Raw Content Proxying</h3>
+                    <p>The "Run" mechanism injects a <code class="inline">&lt;base href="..."&gt;</code> tag into the preview iframe's HTML. In "GitHub Mode", this tag points to a raw content proxy like <code class="inline">raw.githack.com</code>, allowing relative links within a repository (e.g., <code class="inline">&lt;link href="./style.css"&gt;</code>) to resolve correctly.</p>
+                </div>
+            </article>
+
+            <!-- PART IV -->
+            <article id="zainin-engine" class="page-section">
+                <div class="page-header">
+                    <span class="chapter-label">Part IV: Artificial Intelligence</span>
+                    <h1>6.0 The Zainin Cognitive Engine</h1>
+                    <p class="lead">The architecture of the state-aware, autonomous developer agent.</p>
+                </div>
+                <div class="content-body">
+                    <h3>6.1 Architecture of an Autonomous Developer Agent</h3>
+                    <p>Standard chatbots (like the public ChatGPT interface) are stateless regarding your specific application context. Zainin is different. It is a <strong>State-Aware Agent</strong> that sits inside the application's execution flow.</p>
+                    
+                    <h3>6.2 Context Window Management & Token Optimization</h3>
+                    <p>Before Zainin answers a query, the system constructs a massive <strong>Context Payload</strong>. This gives the AI "eyes" to see the current state of the project.</p>
+                     <div class="code-block">
+                        <div class="code-header">Example Context Payload (Serialized to JSON)</div>
+                        <pre><code class="language-json">{
+  "file_structure": ["index.html", "src/style.css", "src/app.js"],
+  "active_file_content": "const app = new App();...",
+  "kanban_state": { "todo": 3, "in_progress": 1, "done": 8 },
+  "conversation_history": [ ...last 15 messages... ]
+}</code></pre>
+                    </div>
+                    
+                    <h3>6.3 System Prompt Engineering & Role Definition</h3>
+                    <p>The context payload is wrapped in a System Prompt that defines Zainin's personality, capabilities, and constraints. For example: "You are an expert full-stack developer named Zainin. Your goal is to help the user build their project. When you need to perform an action, respond ONLY with a JSON object matching the tool schema."</p>
+
+                    <h3>6.4 The "Thought-Action-Observation" Loop</h3>
+                    <p>Zainin operates on a ReAct (Reasoning + Acting) loop pattern, allowing it to interact with the application.</p>
+                    <ol>
+                        <li><strong>Thought (LLM):</strong> The AI analyzes the user request ("Create a file named 'test.js'") and determines an action is needed. It generates a JSON object: <code class="inline">{ "tool": "write_code", "filename": "test.js", "content": "// New file" }</code>.</li>
+                        <li><strong>Action (Frontend):</strong> A JavaScript function detects the JSON output, parses it, and calls the Firestore API to create the document in the VFS.</li>
+                        <li><strong>Observation:</strong> The system confirms the write was successful and informs the AI.</li>
+                        <li><strong>Final Response (LLM):</strong> Zainin generates a natural language response for the user, such as, "Okay, I've created the file <code class="inline">test.js</code> for you."</li>
+                    </ol>
+                </div>
+            </article>
+            
+            <article id="tool-use" class="page-section">
+                <div class="page-header">
+                    <span class="chapter-label">Part IV: Artificial Intelligence</span>
+                    <h1>7.0 Tool Use & Function Calling</h1>
+                    <p class="lead">How Zainin interacts with external services and modifies the project state.</p>
+                </div>
+                <div class="content-body">
+                    <h3>7.1 The Recursive Web Search Protocol (Jina AI)</h3>
+                    <p>To solve the "Hallucination" problem of LLMs, Zainin is equipped with real-time internet access via the Jina AI search API. This enables it to answer questions about recent events or new technologies accurately.</p>
+                    <h4>The Workflow:</h4>
+                    <ol>
+                        <li><strong>Trigger:</strong> User asks, "What is the latest version of Tailwind CSS?"</li>
+                        <li><strong>Tool Call:</strong> AI outputs <code class="inline">{ "tool": "web_search", "query": "latest tailwind css version" }</code>.</li>
+                        <li><strong>Fetch:</strong> The browser sends a request to <code class="inline">https://s.jina.ai/{query}</code>.</li>
+                        <li><strong>Recursion:</strong> The raw text result from the web is fed back into the LLM in a new request, along with the prompt: "Here are the search results. Summarize them for the user."</li>
+                        <li><strong>Output:</strong> The user gets an accurate, cited answer based on live web data.</li>
+                    </ol>
+
+                    <h3>7.2 Database Write Operations via AI</h3>
+                    <p>Zainin can directly modify the Firestore database by calling predefined tools. This includes creating/updating files in the VFS, moving Kanban tasks, or even adding new users to a team based on a high-level command from an authorized user.</p>
+
+                    <h3>7.3 Self-Correction Mechanisms in Code Generation</h3>
+                    <p>A future goal is to implement a self-correction loop. After generating code, Zainin could execute it in a sandboxed environment, read the error output from the console, and then attempt to fix its own code in a recursive loop until the error is resolved.</p>
+                </div>
+            </article>
+
+            <!-- PART V -->
+            <article id="design-system" class="page-section">
+                <div class="page-header">
+                    <span class="chapter-label">Part V: Frontend Engineering</span>
+                    <h1>8.0 The Design System</h1>
+                    <p class="lead">The CSS architecture and component logic that define the MD Colab user interface.</p>
+                </div>
+                <div class="content-body">
+                    <h3>8.1 The "Interstellar" Dark Mode Palette</h3>
+                    <p>MD Colab uses a strict Design System defined in CSS variables to ensure consistency. The palette is designed for high contrast and low eye strain during long coding sessions.</p>
+                    <div class="code-block">
+                        <div class="code-header">:root in style.css</div>
+                        <pre><code class="language-css">:root {
+    --bg-body: #09090b;        /* Deep Space */
+    --bg-sidebar: #0f1014;    /* Nebula */
+    --bg-card: #18181b;        /* Asteroid Surface */
+    --accent: #FF6F00;         /* Solar Flare Orange */
+    --text-primary: #e4e4e7;  /* Star White */
+    --text-secondary: #a1a1aa; /* Distant Galaxy */
+    --border-subtle: #27272a; /* Orbital Path */
+}</code></pre>
+                    </div>
+
+                    <h3>8.2 Glassmorphism Physics & CSS Variables</h3>
+                    <p>To create a modern, "layered" feel without high GPU cost, we use <code class="inline">backdrop-filter: blur(4px)</code> on modal overlays and semi-transparent borders (<code class="inline">rgba(255, 255, 255, 0.1)</code>) to define edges rather than solid lines.</p>
+
+                    <h3>8.3 Toast Notification Queue Logic</h3>
+                    <p>The toast notification system is a DOM-injection engine. It creates a <code class="inline">&lt;div&gt;</code> element dynamically, appends it to a fixed container, uses CSS keyframe animations for entrance/exit, and utilizes <code class="inline">setTimeout</code> for auto-dismissal to prevent DOM bloating.</p>
+
+                    <h3>8.4 Modal Registry & State Management</h3>
+                    <p>A simple, global JavaScript object acts as a modal registry. Functions like <code class="inline">openModal('settings')</code> and <code class="inline">closeModal()</code> toggle CSS classes on the corresponding modal elements, managing their visibility without a complex state library.</p>
+                </div>
+            </article>
+
+            <article id="project-management" class="page-section">
+                <div class="page-header">
+                    <span class="chapter-label">Part V: Frontend Engineering</span>
+                    <h1>9.0 Project Management Modules</h1>
+                    <p class="lead">The logic behind the integrated Kanban and CRM tools.</p>
+                </div>
+                <div class="content-body">
+                    <h3>9.1 Kanban Logic: State Transitions & Drag Heuristics</h3>
+                    <p>The Kanban board is a direct visual representation of the <code class="inline">tasks</code> sub-collection in Firestore. There are three hard-coded states: <code class="inline">todo</code>, <code class="inline">progress</code>, and <code class="inline">done</code>.</p>
+                    <h4>Rendering Strategy</h4>
+                    <p>The <code class="inline">loadKanban</code> function subscribes to real-time updates using Firestore's <code class="inline">onSnapshot</code> listener. On any data change, it clears the DOM columns and rebuilds them. While computationally expensive for 1000+ tasks, for typical projects (<100 tasks), this ensures 100% state synchronization without complex diffing algorithms.</p>
+                    <h4>State Transition</h4>
+                    <p>Moving a task via drag-and-drop triggers a Firestore <code class="inline">update()</code> call, changing the document's <code class="inline">status</code> field. The <code class="inline">onSnapshot</code> listener then automatically moves the card in the UI for all connected users instantly.</p>
+
+                    <h3>9.2 CRM Module: Lead Capture & Data sanitization</h3>
+                    <p>The integrated CRM module provides a simple interface for lead capture. All user-submitted data is sanitized on the client side to prevent XSS before being written to a dedicated <code class="inline">leads</code> collection in Firestore.</p>
+                </div>
+            </article>
+
+             <!-- PART VI -->
+            <article id="deployment" class="page-section">
+                <div class="page-header">
+                    <span class="chapter-label">Part VI: Operations</span>
+                    <h1>10.0 Deployment Pipeline</h1>
+                    <p class="lead">The process for deploying and hosting the MD Colab platform.</p>
+                </div>
+                <div class="content-body">
+                    <p>MD Colab is agnostic to hosting providers but is optimized for Vercel due to its seamless Git integration and global edge network.</p>
+                    <h3>Static Generation</h3>
+                    <p>The project is a pure static site (HTML, CSS, JS). No server-side rendering (SSR) or build step is required, leading to instantaneous deployments. Any push to the `main` branch on GitHub automatically triggers a new deployment on Vercel.</p>
+                </div>
+            </article>
+
+            <article id="disaster-recovery" class="page-section">
+                <div class="page-header">
+                    <span class="chapter-label">Part VI: Operations</span>
+                    <h1>11.0 Disaster Recovery</h1>
+                    <p class="lead">Strategies for ensuring data redundancy and application resilience.</p>
+                </div>
+                <div class="content-body">
+                    <h3>Data Redundancy</h3>
+                    <p>Firestore automatically replicates data across multiple geographic zones within the selected region (e.g., <code class="inline">us-central</code>). This provides protection against a zone-level failure.</p>
+                    <h3>Client-Side Resilience</h3>
+                    <p>If a user's internet connection is lost, Firestore's offline persistence (enabled by default in our configuration) caches all reads. Users can continue to view loaded data. Any writes they make are queued locally and automatically synced upon reconnection.</p>
+                </div>
+            </article>
+            
+            <article id="future-horizons" class="page-section">
+                <div class="page-header">
+                    <span class="chapter-label">Part VI: Operations</span>
+                    <h1>12.0 Future Horizons (2025-2030)</h1>
+                    <p class="lead">A forward-looking roadmap for the evolution of the MD Colab ecosystem.</p>
+                </div>
+                <div class="content-body">
+                    <h3>12.1 The "Global Hub" Initiative</h3>
+                    <p>To reduce latency for users in Asia and Africa, MD Colab plans to implement Geo-Sharding. This involves deploying Firestore instances in multiple regions (e.g., <code class="inline">europe-west</code>, <code class="inline">asia-southeast</code>) and routing users to the nearest database based on their IP address.</p>
+                    
+                    <h3>12.2 MD Auto-Builder</h3>
+                    <p>The next iteration of the platform will include the Scaffold Engine, a powerful new feature driven by Zainin AI.</p>
+                    <h4>Concept</h4>
+                    <p>A user provides a single text prompt ("Make a personal portfolio website with a blog").</p>
+                    <h4>Execution</h4>
+                    <p>Zainin generates the complete file structure (<code class="inline">index.html</code>, <code class="inline">style.css</code>, <code class="inline">script.js</code>, etc.) simultaneously in memory. It then uses the JSZip library to bundle these files into a <code class="inline">.zip</code> archive and triggers an automatic download, giving the user a complete, deployable website in seconds.</p>
+                </div>
+            </article>
+            <!-- PART VII: User Guides -->
+            <article id="collab-guide" class="page-section">
+                <div class="page-header">
+                    <span class="chapter-label">Part VII: User Guides</span>
+                    <h1>13.0 The Collab Workspace</h1>
+                    <p class="lead">A practical guide to navigating the core features of your project workspace.</p>
+                </div>
+                <div class="content-body">
+                    <p>The Collab Workspace is your central hub for project development. After selecting a team from the main sidebar, you choose a project to load this powerful, integrated environment.</p>
+
+                    <img src="/assets/collab/collab-workspace.png" alt="MD Collab Workspace UI" style="width:100%; border-radius: 8px; border: 1px solid var(--border-subtle); margin-bottom: 2rem;">
+
+                    <h3>Key Areas of the Workspace:</h3>
+                    <ul>
+                        <li><strong>Project Header:</strong> At the top, you'll see the project name and its linked GitHub repository. To the right, you can see the profile pictures of all active team members. Click their avatars to view their profiles. The <strong>Settings</strong> button allows you to manage the project's details.</li>
+                        <li><strong>Main Tabs:</strong> The core of the workspace is divided into four powerful tabs:
+                            <ul>
+                                <li><code class="inline">Chat:</code> Communicate in real-time with your team and interact with the Zainin AI agent.</li>
+                                <li><code class="inline">Kanban:</code> Visualize and manage project tasks in a simple To Do, In Progress, and Done format.</li>
+                                <li><code class="inline">Code:</code> Access the integrated IDE. Here you can browse GitHub repositories, manage cloud-saved files, write code, and launch a live preview.</li>
+                                <li><code class="inline">Leads:</code> A lightweight CRM tool for tracking project contacts and potential clients.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </article>
+
+            <article id="profile-guide" class="page-section">
+                <div class="page-header">
+                    <span class="chapter-label">Part VII: User Guides</span>
+                    <h1>14.0 The User Profile Dashboard</h1>
+                    <p class="lead">Managing your personal identity, settings, and activity across MD Collab.</p>
+                </div>
+                <div class="content-body">
+                    <h3>How to Access Your Profile</h3>
+                    <p>To access your personal dashboard, <strong>click your profile name and avatar in the bottom-left corner of the main sidebar</strong> on the Collab page. This centralizes all your personal information and account settings.</p>
+
+                    <img src="/assets/collab/profile-dashboard.png" alt="MD Collab Profile Dashboard UI" style="width:100%; border-radius: 8px; border: 1px solid var(--border-subtle); margin-bottom: 2rem;">
+
+                    <h3>Features of the Profile Dashboard:</h3>
+                    <ul>
+                        <li><strong>Profile Card:</strong> This is your identity hub. Click the <strong>Edit Profile</strong> button to update your name, phone, and address. You can change your profile picture at any time by hovering over it and clicking the camera icon.</li>
+                        <li><strong>MD Pin:</strong> Click the <strong>View MD Pin</strong> button to reveal your unique 8-digit ID. Share this pin with others so they can easily invite you to their teams.</li>
+                        <li><strong>Statistics:</strong> The top row gives you an at-a-glance summary of how many teams you've joined, projects you're a part of, and invitations you've received.</li>
+                        <li><strong>Recent Activity:</strong> This feed shows a history of your most recent invitations, allowing you to track your collaborations.</li>
+                        <li><strong>Security & Account:</strong> In this critical section, you can request a password reset email, sign out of your current session, or permanently delete your account.</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- FOOTER -->
+            <footer class="doc-footer">
+                <p>MD Colab: The Comprehensive System Architecture & Operational Manuscript v3.5.0</p>
+                <p>Approved by Founder of MD Colab "<a href="https://mujtabaalam.vercel.app">Mujtaba Alam</a>"</p>
+            </footer>
+        </main>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="js/doc-script.js"></script>
+</body>
+</html>
