@@ -231,6 +231,19 @@ MD Colab operates a newsletter system to:
 This keeps the community informed and involved.
 
 ---
+## 🔗 Connect With MD Colab
+
+Stay connected with MD Colab across platforms:
+
+- **GitHub (Organization):** [MD-Colab](https://github.com/MD-Colab/)
+- **GitHub (Founder – Mujtaba Alam):** [Mujtaba891](https://github.com/Mujtaba891/)
+- **LinkedIn:** [MD Colab on LinkedIn](https://www.linkedin.com/in/md-colab-073266392/)
+- **YouTube:** [MD Colab YouTube Channel](https://www.youtube.com/channel/UCTvevHI3yewJxV2tvM2iggw)
+- **Hugging Face:** [md-colab on Hugging Face](https://huggingface.co/md-colab)
+- **Twitter (X):** [@MdColab](https://x.com/MdColab?s=08)
+- **Discord Community:** [Join Discord](https://discord.gg/enEwEarF)
+
+---
 
 ## 📜 License
 
